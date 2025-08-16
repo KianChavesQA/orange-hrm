@@ -1,3 +1,4 @@
+import userData from "../fixtures/users/userData.json";
 //Orange HRM Login Test
 describe("Orange HRM Tests", () => {
   // Before each it visist the Login Page
@@ -18,19 +19,11 @@ describe("Orange HRM Tests", () => {
     sectionTitleTopBar: ".oxd-topbar-header-breadcrumb-module",
     dasboardGrid: ".orangehrm-dashboard-grid",
   };
-
-  const userData = {
-    validUsername: "Admin",
-    validPassword: "admin123",
-    invalidUsername: "errorUser",
-    invalidPassword: "errorPass",
-  };
-
   // Sucessful  Login
 
   it("Login - Sucess", () => {
-    cy.get(selectorsList.usernameField).type(userData.validUsername);
-    cy.get(selectorsList.passwordField).type(userData.validPassword);
+    cy.get(selectorsList.usernameField).type(userData.userSucess.username);
+    cy.get(selectorsList.passwordField).type(userData.userSucess.password);
     cy.get(selectorsList.loginButton).click();
     cy.location("pathname").should("equal", "/web/index.php/dashboard/index");
     cy.get(selectorsList.sectionTitleTopBar).should("contain", "Dashboard");
@@ -40,8 +33,8 @@ describe("Orange HRM Tests", () => {
   // Uncessfull Login
 
   it("Login - Fail", () => {
-    cy.get(selectorsList.usernameField).type(userData.invalidUsername);
-    cy.get(selectorsList.passwordField).type(userData.invalidPassword);
+    cy.get(selectorsList.usernameField).type(userData.userFail.username);
+    cy.get(selectorsList.passwordField).type(userData.userFail.password);
     cy.get(selectorsList.loginButton).click();
     cy.get(selectorsList.alertMessage).should("contain", "Invalid");
   });
