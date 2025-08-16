@@ -30,5 +30,4 @@ Este projeto é um estudo realizado pela equipe Lumestack, focado em automação
 
 ## Contato
 
-Kian Chaves Olivera
-email: kianchaves@live.com
+Kian Chaves Oliveira - Email: kianchaves@live.com
