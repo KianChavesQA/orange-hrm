@@ -11,19 +11,19 @@ const personalPage = new PersonalPage();
 
 //Orange HRM Login Test
 describe("Orange HRM Tests", () => {
-  // Sucessful Info Update
-
   beforeEach(() => {
     // Access the login page before each test
     loginPage.acessLoginPage();
   });
 
+  // Successful Login and User Info Update
   it("User Info Update - Sucess", () => {
     // Login to the application
     loginPage.loginWithUser(
       userData.userSuccess.username,
       userData.userSuccess.password
     );
+
     // Verify successful login
     dashboardPage.checkDashboardPage();
 
