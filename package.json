@@ -1,0 +1,23 @@
+{
+  "name": "orange-hrm",
+  "version": "1.0.0",
+  "description": "Este projeto é um estudo realizado pela equipe Lumestack, focado em automação de testes na aplicação Orange HRM utilizando Cypress e Git.",
+  "homepage": "https://github.com/KianChavesQA/orange-hrm#readme",
+  "bugs": {
+    "url": "https://github.com/KianChavesQA/orange-hrm/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KianChavesQA/orange-hrm.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "cypress.config.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
