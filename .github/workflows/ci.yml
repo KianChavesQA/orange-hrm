@@ -12,6 +12,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
+          install: npm ci --save-dev
           start: npm cypress run
 
       - name: Upload screenshots
