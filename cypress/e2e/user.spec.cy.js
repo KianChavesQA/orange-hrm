@@ -1,7 +1,7 @@
-import LoginPage from "../pages/loginPage.js";
-import DashboardPage from "../pages/dashboardPage.js";
-import MenuPage from "../pages/menuPage.js";
-import PersonalPage from "../pages/personalPage.js";
+import LoginPage from "../pageObjects/loginPage.js";
+import DashboardPage from "../pageObjects/dashboardPage.js";
+import MenuPage from "../pageObjects/menuPage.js";
+import PersonalPage from "../pageObjects/personalPage.js";
 import userData from "../fixtures/users/userData.json";
 
 const loginPage = new LoginPage();

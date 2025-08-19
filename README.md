@@ -4,11 +4,24 @@ Este projeto é um estudo realizado pela equipe Lumestack, focado em automação
 
 ## Estrutura do Projeto
 
-- `cypress/`: Scripts de testes automatizados
-- `docs/`: Documentação dos testes
-- `reports/`: Relatórios de execução
+A estrutura do projeto foi organizada para facilitar a manutenção, escalabilidade e colaboração entre os membros da equipe. Abaixo estão os principais diretórios e arquivos:
 
-## Tecnologias Utilizadas
+- `.github/`: Contém configurações de workflows do GitHub Actions para integração contínua, como automação de testes e validação de pull requests.
+- `cypress/`: Scripts de testes automatizados.
+   - `fixtures/`: Arquivos de dados simulados (mock data) utilizados nos testes, como usuários, respostas de API, etc.
+   - `e2e/`: Testes end-to-end escritos em Cypress.
+   - `support/`: Utilitários, comandos customizados e configuração global dos testes.
+   - `pageObjects/`: Implementação do padrão Page Objects Model, encapsulando elementos e ações das páginas testadas.
+- `docs/`: Documentação dos testes e do projeto.
+- `reports/`: Relatórios de execução dos testes, gerados automaticamente após as execuções.
+- `package.json`: Gerenciamento de dependências e scripts do projeto.
+- `cypress.json` ou `cypress.config.js`: Configurações do Cypress, como baseUrl, timeouts e paths.
+
+Além das tecnologias principais, este projeto utiliza o padrão **Page Objects Model (POM)** para organizar e estruturar os testes automatizados. O POM facilita a manutenção e reutilização dos scripts, separando a lógica de interação com elementos da interface das validações dos testes.
+
+- **Cypress**: Framework de automação de testes end-to-end.
+- **Git**: Controle de versão.
+- **Page Objects Model**: Estrutura para encapsular elementos e ações das páginas testadas.
 
 - [Cypress](https://www.cypress.io/)
 - [Git](https://git-scm.com/)
@@ -17,69 +30,19 @@ Este projeto é um estudo realizado pela equipe Lumestack, focado em automação
 
 1. Instale as dependências:
    ```bash
-   npm install
+   npm install cypress --save-dev
    ```
 2. Execute os testes:
-   ```bash
-   npx cypress open
-   ```
-   ou
-   ```bash
-   npx cypress run
-   ```
+    ```bash
+    npx cypress open
+    ```
+    ou
+    ```bash
+    npx cypress run
+    ```
 
 ## Contato
 
 Kian Chaves Oliveira - Email: kianchaves@live.com
 
-import "chai";
 
-//Orange HRM Login Test
-describe("Orange HRM Tests", () => {
-
-// Before each it visist the Login Page
-
-beforeEach(() => {
-cy.visit(
-"https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
-);
-});
-
-// Selectors List
-
-const selectorsList = {
-usernameField: "[name='username']",
-passwordField: "[name='password']",
-loginButton: '[type="submit"]',
-alertMessage: "[role='alert']",
-sectionTitleTopBar: ".oxd-topbar-header-breadcrumb-module",
-dasboardGrid: ".orangehrm-dashboard-grid"
-};
-
-const userData = {
-validUsername: "Admin",
-validPassword: "admin123",
-invalidUsername: "errorUser",
-invalidPassword: "errorPass"
-};
-
-// Sucessful Login
-
-it("Login - Sucess", () => {
-cy.get(selectorsList.usernameField).type(userData.validUsername);
-cy.get(selectorsList.passwordField).type(userData.validPassword);
-cy.get(selectorsList.loginButton).click();
-cy.location("pathname").should("equal", "/web/index.php/dashboard/index");
-cy.get(selectorsList.sectionTitleTopBar).should("contain", "Dashboard");
-cy.get(selectorsList.dasboardGrid).should("be.visible");
-});
-
-// Uncessfull Login
-
-it("Login - Fail", () => {
-cy.get(selectorsList.usernameField).type(userData.invalidUsername);
-cy.get(selectorsList.passwordField).type(userData.invalidPassword);
-cy.get(selectorsList.loginButton).click();
-cy.get(selectorsList.alertMessage).should("contain", "Invalid");
-});
-});
