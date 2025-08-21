@@ -4,13 +4,16 @@ import MenuPage from "../pageObjects/menuPage.js";
 import PersonalPage from "../pageObjects/personalPage.js";
 import userData from "../fixtures/users/userData.json";
 
+var Chance = require("chance");
+
+var chance = new Chance();
 const loginPage = new LoginPage();
 const dashboardPage = new DashboardPage();
 const menuPage = new MenuPage();
 const personalPage = new PersonalPage();
 
 //Orange HRM Login Test
-describe("Orange HRM Tests", () => {
+describe("User Tests", () => {
   beforeEach(() => {
     // Access the login page before each test
     loginPage.acessLoginPage();
@@ -32,30 +35,25 @@ describe("Orange HRM Tests", () => {
 
     // Personal Details Update
     personalPage.updatePersonalDetails(
-      "John",
-      "Doe",
-      "123456789",
-      "987654321",
+      chance.first(),
+      chance.last(),
+      chance.integer({ min: 1012120, max: 9911199 }),
+      chance.ssn(),
       "A1234567",
-      "2025-12-31"
+      chance.date().toLocaleDateString("en-CA")
     );
 
     // Nationality and Marital Status
-    personalPage.updateNationalityAndMaritalStatus("American", "Single");
+    personalPage.updateNationalityAndMaritalStatus(
+      "American",
+      "Single",
+      chance.date().toLocaleDateString("en-CA")
+    );
 
     // Save Personal Details
     personalPage.savePersonalDetails();
 
     // Custom Fields Update
     personalPage.updateCustomFields("B-", "Custom Value");
-  });
-
-  // Uncessfull Login
-  it.only("Login - Fail", () => {
-    loginPage.loginWithUser(
-      userData.userFail.username,
-      userData.userFail.password
-    );
-    loginPage.checkLoginErrorMessage("Invalid credentials");
   });
 });

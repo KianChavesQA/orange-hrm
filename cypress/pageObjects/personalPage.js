@@ -22,7 +22,8 @@ class PersonalPage {
     idNumber,
     sinNumber,
     licenseNumber,
-    licenseExpiryDate
+    licenseExpiryDate,
+    dateOfBirth
   ) {
     cy.get(this.selectorsList().firstNameField).clear().type(firstName);
     cy.get(this.selectorsList().lastNameField).clear().type(lastName);
@@ -34,8 +35,7 @@ class PersonalPage {
       .clear()
       .type(licenseExpiryDate);
     cy.get(this.selectorsList().dateCloseButton).click();
-    cy.get(this.selectorsList().dateInputIcon).eq(0).click();
-    cy.get(this.selectorsList().dateCloseButton).click();
+   
   }
   updateNationalityAndMaritalStatus(nationality, maritalStatus) {
     cy.get(this.selectorsList().genericIcon).eq(0).click();
@@ -55,12 +55,18 @@ class PersonalPage {
     cy.get(this.selectorsList().alertMessageCloseButton).click();
   }
   // Custom Fields Update
-  updateCustomFields(customType, customValue) {
+  updateCustomFields(customType, customValue, dateOfBirth) {
     cy.get(this.selectorsList().genericIcon).eq(2).click();
     cy.contains(this.selectorsList().genericListField, customType)
       .scrollIntoView()
       .click();
     cy.get(this.selectorsList().genericField).eq(9).clear().type(customValue);
+    cy.get(this.selectorsList().genericField)
+      .eq(7)
+      .clear()
+      .type(dateOfBirth);
+    cy.get(this.selectorsList().dateCloseButton).click();
+
   }
   saveCustomFields() {
     cy.get(this.selectorsList().saveButton).eq(1).click({ force: true });
